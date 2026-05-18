@@ -38,14 +38,15 @@ res.status(200).json({  name: "John x Doe",
 })
 });
 app.post("/",async(req:Request,res:Response)=>{
-     //console.log(req.body);
-     const {name,Email,Email1}=req.body;
+    // console.log(req.body);
+     const {id,name,birth_year,country}=req.body;
+     const result=await pool.query(`
+        INSERT INTO users(name,birth_year,country) VALUES($1,$2,$3) RETURNING id
+        `,[name,birth_year,country]);
+        console.log(result);
      res.status(201).json({
-        message:"Created",
-        data:{
-            name,
-            Email,
-        },
+        message:"User Created successfully",
+        data:result.rows[0],
      })
 });
 
