@@ -37,7 +37,7 @@ res.status(200).json({  name: "John x Doe",
   email: "john.doe@example.com" 
 })
 });
-app.post("/",async(req:Request,res:Response)=>{
+app.post("/api/users",async(req:Request,res:Response)=>{
     // console.log(req.body);
      const {id,name,birth_year,country}=req.body;
      const result=await pool.query(`
@@ -49,6 +49,24 @@ app.post("/",async(req:Request,res:Response)=>{
         data:result.rows[0],
      })
 });
+app.get("/api/users",async(req:Request,res:Response)=>{
+    try{
+        const result=await pool.query(`
+        SELECT * FROM users
+        `);
+        res.status(200).json({
+            success:true,
+            message:"Users retrived successfully",
+            data: result.rows,
+        })
+    }catch(error:any){
+        res.status(500).json({
+            sucess:false,
+            message:error.message,
+            error:error,
+        })
+    }
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
