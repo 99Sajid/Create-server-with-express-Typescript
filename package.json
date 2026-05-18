@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000C\u0000r\u0000e\u0000a\u0000t\u0000e\u0000-\u0000s\u0000e\u0000r\u0000v\u0000e\u0000r\u0000-\u0000w\u0000i\u0000t\u0000h\u0000-\u0000e\u0000x\u0000p\u0000r\u0000e\u0000s\u0000s\u0000-\u0000T\u0000y\u0000p\u0000e\u0000s\u0000c\u0000r\u0000i\u0000p\u0000t\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "dev" :"tsx watch src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,9 +21,11 @@
   "homepage": "https://github.com/99Sajid/Create-server-with-express-Typescript#readme",
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@types/pg": "^8.20.0",
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.21.0"
   }
 }
