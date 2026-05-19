@@ -85,6 +85,33 @@ app.get("/api/users/:id",async(req:Request,res:Response)=>{
             data: result.rows[0],
         })
     }catch(error:any){
+        res.status(404).json({
+            success:false,
+            message:error.message,
+            error:error,
+        })
+    }
+});
+
+app.put("/api/users/:id",async(req:Request,res:Response)=>{
+    const {id}=req.params;
+    const{name,birth_year,country}=req.body;
+    try{
+        const result=await pool.query(`
+        UPDATE users SET name=$1, birth_year=$2, country=$3, updated_at=NOW() WHERE id=$4 RETURNING *
+        `,[name,birth_year,country,id]);
+        if(result.rows.length===0){
+            return res.status(404).json({
+                success:false,
+                message:"User not found"
+            });
+        }
+        res.status(200).json({
+            success:true,
+            message:"User updated successfully",
+            data: result.rows[0],
+        })
+    }catch(error:any){
         res.status(500).json({
             success:false,
             message:error.message,
